@@ -8,7 +8,7 @@ public interface UserDao {
 	
 	public User findByUser(User user);
 	
-	public User findByUserId(int id);
+	public User findByUserId(int id);//根据用户id查找用户
 	
 	public void update(User user);
 

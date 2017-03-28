@@ -31,6 +31,7 @@ public class UserDaoImpl implements UserDao {
 		this.getCurrentSession().save(user);
 	}
 
+	//验证登录
 	@Override
 	public User findByUser(User user) {
 		return (User) this.getCurrentSession()

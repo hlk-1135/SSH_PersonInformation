@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * 用户类，对应user表
  * User entity. @author MyEclipse Persistence Tools
  */
 @Entity

@@ -5,7 +5,7 @@ import com.hlk.model.User;
 public interface UserService {
 	
 	/**
-	 * 注册
+	 * 注册用户
 	 * @param user
 	 */
 	public void save(User user);
@@ -23,6 +23,11 @@ public interface UserService {
 	 */
 	public void update(User user);
 	
+	/**
+	 * 根据主键id查找用户
+	 * @param id
+	 * @return
+	 */
 	public User findUserById(int id);
 
 }
