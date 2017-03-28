@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>      
+<beans xmlns="http://www.springframework.org/schema/beans"      
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"      
+    xmlns:tx="http://www.springframework.org/schema/tx"      
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd      
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd      
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">  
+
+    <!-- 自动扫描dao和service包(自动注入) -->
+	<context:component-scan base-package="com.hlk.dao,com.hlk.service"/>
+	<!-- 引入属性文件 -->
+	<context:property-placeholder location="/WEB-INF/classes/config.properties"/>
+	<context:property-placeholder location="/WEB-INF/classes/log4j.properties"/>
+	<!-- 配置数据源 -->
+	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+		<property name="driverClassName" value="${driverClassName}" />
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${jdbc_url}" />
+		<property name="username" value="${jdbc_username}" />
+		<property name="password" value="${jdbc_password}" />
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="3" />
+		<property name="minIdle" value="3" />
+		<property name="maxActive" value="20" />
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="60000" />
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<property name="validationQuery" value="${validationQuery}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="stat" />
+	</bean>
+	<!-- 配置hibernate session工厂 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+		<!--自动扫描注解方式配置的hibernate类文件  -->    
+        <property name="packagesToScan">
+        	<list>
+				<value>com.hlk.model</value>
+			</list>
+        </property> 
+	</bean>
+	<!-- 用注解来实现事务管理 -->    
+    <bean id="txManager" name="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">    
+        <property name="sessionFactory" ref="sessionFactory"></property>          
+    </bean>
+    <!-- 注解方式配置事物 -->  
+    <tx:annotation-driven transaction-manager="txManager"/> 
+</beans>

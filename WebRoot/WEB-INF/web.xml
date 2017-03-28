@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name></display-name>	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- 配置Spring的监听器，用于初始化ApplicationContext对象 -->  
+  <listener>  
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
+  </listener>  
+  <context-param>  
+    <param-name>contextConfigLocation</param-name>  
+    <param-value>/WEB-INF/classes/applicationContext.xml</param-value>  
+  </context-param>  
+  <filter>
+  	<filter-name>struts2</filter-name>
+  	<filter-class>
+  		org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+  	</filter-class>
+    <!-- 自动扫描action -->  
+    <init-param>  
+      <param-name>actionPackages</param-name>  
+      <param-value>com.hlk.action</param-value>  
+    </init-param> 
+  </filter>
+  <filter-mapping>
+  	<filter-name>struts2</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+ </web-app>

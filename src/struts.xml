@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<!-- 指定由spring负责action对象的创建 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 是否启用开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- struts配置文件改动后，是否重新加载 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 设置浏览器是否缓存静态内容 -->
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<!-- 请求参数的编码方式 -->
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<!-- 每次HTTP请求系统都重新加载资源文件，有助于开发 -->
+	<constant name="struts.i18n.reload" value="true" />
+	<!-- 文件上传最大值 -->
+	<constant name="struts.multipart.maxSize" value="104857600" />
+	<!-- 让struts2支持动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<!-- Action名称中是否还是用斜线 -->
+	<constant name="struts.enable.SlashesInActionNames" value="false" />
+	<!-- 允许标签中使用表达式语法 -->
+	<constant name="struts.tag.altSyntax" value="true" />
+	<!-- 对于WebLogic,Orion,OC4J此属性应该设置成true -->
+	<constant name="struts.dispatcher.parametersWorkaround" value="false" />
+	
+	<package name="com.hlk.action" extends="struts-default">
+	
+		
+		
+		<action name="login">
+		  <result>/login.jsp</result>
+		</action>
+		
+		<!-- userAction -->
+		<action name="user_*" class="com.hlk.action.UserAction" method="{1}">
+		 <!-- 登陆成功 -->
+         <result name="index">/index.jsp</result>
+         <!-- 登陆失败 -->
+         <result name="loginFaild">/login.jsp</result>
+        </action>
+        
+        <!-- friendAction -->
+        <action name="fri_*" class="com.hlk.action.FriendAction" method="{1}">
+         <!-- 列表展示 -->
+			<result name="list">/list.jsp</result>			
+			<!-- 进入添加页面视图 -->
+			<result name="add">/addFriend.jsp</result>
+			<!-- 添加成功，进入列表 (防止刷新就多一条记录问题，所以用重定向) -->
+			<result name="frilistAction" type="redirectAction">fri_list</result>	
+			<!-- 进入修改页面 -->
+			<result name="edit">/edit.jsp</result>
+        </action>
+        
+	</package>
+</struts>
