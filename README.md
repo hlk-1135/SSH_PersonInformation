@@ -1,0 +1,2 @@
+# SSH_PersonInformation
+Struts2+Spring3+Hibernate4集成框架，MySQL数据库搭建的个人信息管理系统
