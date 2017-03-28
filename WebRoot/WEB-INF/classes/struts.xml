@@ -27,7 +27,21 @@
 	
 	<package name="com.hlk.action" extends="struts-default">
 	
+		<!--  拦截器配置 -->
+		<interceptors>
+			<interceptor name="userInterceptor" class="com.hlk.action.UserInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="userInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 执行指定的拦截器 -->
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
 		
+		<!-- 全局视图 -->
+		<global-results>
+			<result name="login" type="redirect">/login.jsp</result>
+		</global-results>
 		
 		<action name="login">
 		  <result>/login.jsp</result>
