@@ -10,7 +10,7 @@
   </head>
   
   <body>	
-  	<s:form action="/user_login" method="post" theme="simple">
+  	<s:form action="user_login" method="post" theme="simple">
   	 <table border="1" align="center" cellpadding="5" cellspacing="0">
   	 	<tr>
   	 		<td>账号</td>
@@ -27,6 +27,7 @@
   	 	<tr>
   	 		<td colspan="2">
   	 			<s:submit value="登陆"></s:submit>
+  	 			<a href="regist.jsp">注册</a>
   	 		</td>
   	 	</tr>
   	 	

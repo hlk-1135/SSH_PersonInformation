@@ -1,3 +1,4 @@
+<%@page import="javax.persistence.Id"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%  
@@ -17,7 +18,6 @@ request.setAttribute("path", basePath);
 <body id="bg">
 
 <div class="conta">
-
 	<div class="leftsidebar_box">
 		<div class="line">
 			<div class="avtor">
@@ -53,45 +53,37 @@ request.setAttribute("path", basePath);
 			<h3>欢迎使用个人信息管理系统！</h3>
 		</div>
 		<div class="right_section">
-		  <!-- 个人信息 -->
-		  <div class="person_info">
-		  	<h3>个人信息：</h3>
-		  	<table class="table table-bordered table-striped">
-		  	<tr>
-                <th>属性：</th>
-                <td>具体信息：</td>
-            </tr>
-            <tr>
-            <tr>
-                <th>UserID</th>
-                <td><s:property value="#session.userInfo.userId"/></td>
-            </tr>
-            <tr>
-                <th>UserName</th>
-                <td><s:property value="#session.userInfo.userName"/></td>
-            </tr>
-            <tr>
-                <th>UserWork</th>
-                <td><s:property value="#session.userInfo.work"/></td>
-            </tr>
-            <tr>
-                <th>RealName</th>
-                <td><s:property value="#session.userInfo.realName"/></td>
-            </tr>
-            <tr>
-                <th>UserPhone</th>
-                <td><s:property value="#session.userInfo.phone"/></td>
-            </tr>
-        	</table>
+		  <!-- 联系人列表 -->
+		  <div class="jtitle">
+		  <h3>添加文件：</h3>
+		  <br/> 
+			<s:form action="file_upload" method="post" enctype="multipart/form-data">
+			  	<div class="form-group">
+	                <label for="fileTitle">文件标题:</label>
+	                <input type="text" class="form-control" id="fileTitle" name="fileTitle" placeholder="请输入文件标题"/>
+	            </div>
+	            <div class="form-group">
+	                <label for="fileSelect">选择文件:</label>
+	                <input type="file" class="form-control" id="fileSelect" name="upload"/>
+	            </div>
+	            <div class="form-group">
+	                <label for="description">文件描述:</label>
+	                <input type="text" class="form-control" id="description" name="description" placeholder="请描述文件"/>
+	            </div>
+	            <div class="form-group">
+	                <label for="fileDate">上传日期:</label>
+	                <input type="date" class="form-control" id="fileDate" name="fileDate"/>
+	            </div>
+	            <input type="hidden" id="userId" name="userId" value="<s:property value="#session.userInfo.userId"/>"/>
+	            <div class="form-group">
+	                <button type="submit" class="btn btn-sm btn-success">提交</button>
+	            </div>
+		  	 </s:form>
 		  </div>
-		</div>
-		<div class="right_last">
-		  <div align="center">
-		  </div>
-		</div>
-	</div>
-</div>
-<!-- 左侧导航栏目 -->
+		  
+		</div><br/>
+	   </div>
+	  </div>
 <script type="text/javascript" src="${path }js/jquery.min.js"></script>
 <script type="text/javascript" src="${path }js/admin.js"></script>
 <script type="text/javascript" src="${path }js/bootstrap.min.js"></script>

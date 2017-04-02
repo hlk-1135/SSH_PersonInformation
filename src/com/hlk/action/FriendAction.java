@@ -42,6 +42,7 @@ public class FriendAction extends ActionSupport implements ModelDriven<Friends>,
 		this.friendService = friendService;
 	}
 	//用户Service
+	@Resource
 	private UserService userService;
 	public void setUserService(UserService userService) {
 		this.userService = userService;

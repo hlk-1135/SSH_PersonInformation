@@ -24,8 +24,12 @@
 	<constant name="struts.tag.altSyntax" value="true" />
 	<!-- 对于WebLogic,Orion,OC4J此属性应该设置成true -->
 	<constant name="struts.dispatcher.parametersWorkaround" value="false" />
+	<!-- 文件上传可接受的最大值 -->
+	<constant name="struts.multipart.maxSize" value="1000000" />
+	<!-- 设置文件上传时的临时文件夹时 -->
+	<constant name="struts.multipart.saveDir" value="/file"/>
 	
-	<package name="com.hlk.action" extends="struts-default">
+	<package name="com.hlk.action" extends="struts-default" namespace="/">
 	
 		<!--  拦截器配置 -->
 		<interceptors>
@@ -40,32 +44,46 @@
 		
 		<!-- 全局视图 -->
 		<global-results>
+			<result name="index">/index.jsp</result>		
 			<result name="login" type="redirect">/login.jsp</result>
 		</global-results>
 		
-		<action name="login">
-		  <result>/login.jsp</result>
-		</action>
-		
 		<!-- userAction -->
 		<action name="user_*" class="com.hlk.action.UserAction" method="{1}">
-		 <!-- 登陆成功 -->
-         <result name="index">/index.jsp</result>
-         <!-- 登陆失败 -->
-         <result name="loginFaild">/login.jsp</result>
+		  <!-- 登陆成功 -->
+          <result name="index">/index.jsp</result>
+          <!-- 登陆失败 -->
+          <result name="loginFaild">/login.jsp</result>
+          <!-- 注册成功 -->
+          <result name="regsucc">/login.jsp</result>
+          <result name="error">/regist.jsp</result>
         </action>
         
         <!-- friendAction -->
         <action name="fri_*" class="com.hlk.action.FriendAction" method="{1}">
-         <!-- 列表展示 -->
-			<result name="list">/list.jsp</result>			
+            <!-- 列表展示 -->
+			<result name="list">/WEB-INF/jsp/list.jsp</result>			
 			<!-- 进入添加页面视图 -->
-			<result name="add">/addFriend.jsp</result>
+			<result name="add">/WEB-INF/jsp/addFriend.jsp</result>
 			<!-- 添加成功，进入列表 (防止刷新就多一条记录问题，所以用重定向) -->
 			<result name="frilistAction" type="redirectAction">fri_list</result>	
 			<!-- 进入修改页面 -->
-			<result name="edit">/edit.jsp</result>
+			<result name="edit">/WEB-INF/jsp/edit.jsp</result>
         </action>
         
+        <!-- FileAction -->
+        <action name="file_*" class="com.hlk.action.FileAction" method="{1}">
+           <interceptor-ref name="fileUpload">
+             <param name="maximumSize">10000000</param>  
+             <param name="allowedTypes">image/png,image/jpeg,image/jpg</param>  
+           </interceptor-ref>
+           <interceptor-ref name="defaultStack"/>
+           <param name="savePath">/file</param>
+           
+           <result name="viewFile">/WEB-INF/jsp/uploadFile.jsp</result>
+           <result name="list">/WEB-INF/jsp/file.jsp</result>
+	       <result name="success">/WEB-INF/jsp/success.jsp</result>
+	       <result name="error">error.jsp</result>
+	   </action>
 	</package>
 </struts>

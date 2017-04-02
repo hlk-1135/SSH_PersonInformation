@@ -10,6 +10,8 @@ public interface UserDao {
 	
 	public User findByUserId(int id);//根据用户id查找用户
 	
+	public User findByUserName(String userName);
+	
 	public void update(User user);
 
 }

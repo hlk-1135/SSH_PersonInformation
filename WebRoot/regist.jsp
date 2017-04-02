@@ -1,12 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%  
 String path = request.getContextPath();  
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
 request.setAttribute("path", basePath);  
 %>
-<%@taglib prefix="s" uri="/struts-tags" %>
-
+<%@taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,21 +18,21 @@ request.setAttribute("path", basePath);
 				<div class="continer_left">
 					<div class="left_main">
 						<div class="continer_main">
-							<form id="fieldset">
+							<s:form id="fieldset" action="user_regist" method="post">
 								<label for=name><span class="txt-impt">*</span>用户名:</label>
-								<input type="text" id="name" onchange="checkName()" />
+								<input type="text" name="userName" id="userName" onchange="checkName()" />
 								<div id="nameTips" class="tips">
 									<p class="txt-tips" id="errorName">2-12位以内的中英文字符和数字</p>
 								</div>
 								
 								<label for=name><span class="txt-impt">*</span>手机号:</label>
-								<input type="text" id="phoneNumber" onchange="checkPhone()"/>
+								<input type="text" name="phone" id="phone" onchange="checkPhone()"/>
 								<div id="phoneTips" class="tips">
 									<p class="txt-tips" id="errorPhone">11位手机号</p>
 								</div>
 								
 								<label for=password><span class="txt-impt">*</span>密码:</label>
-								<input type="password" id="password" onchange="checkPassword()"/>
+								<input type="password" name="password" id="password" onchange="checkPassword()"/>
 								<br>
 								<div id="nameTips" class="tips">
 									<p class="txt-tips" id="errorword">4~12个字符，区分大小写</p>
@@ -47,26 +45,27 @@ request.setAttribute("path", basePath);
 									<p class="txt-tips" id="errorword_2">请再次确认密码</p>
 								</div>			
 								<label for=apart><span class="txt-impt">*</span>职业:</label>
-								<input type="text" id="apart" onchange="checkApart()"/>
+								<input type="text" name="work" id="work" onchange="checkApart()"/>
 								<br />
 								<div id="nameTips" class="tips">
 									<p class="txt-tips" id="errorApart">请输入职业</p>
 								</div>
 								<label for=realname><span class="txt-impt">*</span>真实姓名:</label>
-								<input class="textfield" id="realname" onchange="checkRealName()"/>
+								<input class="textfield" name="realName" id="realName" onchange="checkRealName()"/>
 								<br>
 								<div id="nameTips" class="tips">
 									<p class="txt-tips" id="errorRealName">请输入真实姓名</p>
 								</div>
 								
-								<input id="last" type="button" value="立即注册" onclick="submitbox()" />
+								<input type="submit" value="立即注册" onchange="submitbox()"/>
 								<input id="last" type="reset" value="重写" />
-							</form>
+							</s:form>
 						</div>
     				</div>
 				</div>
 			</div>
 		</div>
+	
 	</body>
-	<script src="${path }js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/index.js"></script>
 </html>

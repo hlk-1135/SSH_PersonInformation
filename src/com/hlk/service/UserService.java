@@ -29,5 +29,12 @@ public interface UserService {
 	 * @return
 	 */
 	public User findUserById(int id);
+	
+	/**
+	 * 根据userName查找用户(校验注册时该用户是否已经存在)
+	 * @param userName
+	 * @return
+	 */
+	public User findUserByUserName(String userName);
 
 }

@@ -9,6 +9,8 @@ import com.opensymphony.xwork2.ModelDriven;
 
 public class UserAction extends BaseAction implements ModelDriven<User>{
 	
+	private static final long serialVersionUID = 1L;
+	
 	private User user = new User();
 	public void setUser(User user) {
 		this.user = user;
@@ -48,6 +50,25 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 		}
 	}
 	
+	/**
+	 * 用户注册
+	 * @return
+	 */
+	public String regist() {
+		User userInfo = userService.findUserByUserName(user.getUserName());
+		System.out.println("regist:"+user.getUserName());
+		if(userInfo == null) {
+			userService.save(user);
+			return "regsucc";
+		} else {
+			return "error";
+		}
+	}
+	
+	/**
+	 * 更新用户信息
+	 * @return
+	 */
 	public String update() {
 		session.put("userInfo", user);
 		userService.save(user);

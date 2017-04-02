@@ -1,3 +1,4 @@
+<%@page import="javax.persistence.Id"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%  
@@ -17,7 +18,6 @@ request.setAttribute("path", basePath);
 <body id="bg">
 
 <div class="conta">
-
 	<div class="leftsidebar_box">
 		<div class="line">
 			<div class="avtor">
@@ -53,45 +53,38 @@ request.setAttribute("path", basePath);
 			<h3>欢迎使用个人信息管理系统！</h3>
 		</div>
 		<div class="right_section">
-		  <!-- 个人信息 -->
-		  <div class="person_info">
-		  	<h3>个人信息：</h3>
-		  	<table class="table table-bordered table-striped">
-		  	<tr>
-                <th>属性：</th>
-                <td>具体信息：</td>
-            </tr>
-            <tr>
-            <tr>
-                <th>UserID</th>
-                <td><s:property value="#session.userInfo.userId"/></td>
-            </tr>
-            <tr>
-                <th>UserName</th>
-                <td><s:property value="#session.userInfo.userName"/></td>
-            </tr>
-            <tr>
-                <th>UserWork</th>
-                <td><s:property value="#session.userInfo.work"/></td>
-            </tr>
-            <tr>
-                <th>RealName</th>
-                <td><s:property value="#session.userInfo.realName"/></td>
-            </tr>
-            <tr>
-                <th>UserPhone</th>
-                <td><s:property value="#session.userInfo.phone"/></td>
-            </tr>
-        	</table>
+		  <!-- 联系人列表 -->
+		  <div class="jtitle">
+		  <h3>修改信息：</h3>
+			<s:form action="/fri_update" method="post" theme="simple">
+			  	<div class="form-group">
+	                <label for="friendName">姓名:</label>
+	                <input type="text" class="form-control" id="friendName" name="friendName" placeholder="请输入姓名" value="<s:property value="#request.fri.friendName"/>"/>
+	            </div>
+	            <div class="form-group">
+	                <label for="friendPhone">手机号码:</label>
+	                <input type="text" class="form-control" id="friendPhone" name="friendPhone" placeholder="请输入手机号码" value="<s:property value="#request.fri.friendPhone"/>"/>
+	            </div>
+	            <div class="form-group">
+	                <label for="friendCompany">就职公司:</label>
+	                <input type="text" class="form-control" id="friendCompany" name="friendCompany" placeholder="请输入就职公司" value="<s:property value="#request.fri.friendCompany"/>">
+	            </div>
+	            <div class="form-group">
+	                <label for="friendQq">腾讯QQ:</label>
+	                <input type="text" class="form-control" id="friendQq" name="friendQq" placeholder="请输入QQ" value="<s:property value="#request.fri.friendQq"/>">
+	            </div>
+	            <!-- 修改时，注意自己的id不能修改，而且不能忘记与user表关联的外键userId -->
+	            <input type="hidden" id="friendId" name="friendId" value="<s:property value="#request.fri.friendId"/>">
+	            <input type="hidden" id="userId" name="userId" value="<s:property value="#session.userInfo.userId"/>">
+	            <div class="form-group">
+	                <button type="submit" class="btn btn-sm btn-success">提交修改</button>
+	            </div>
+		  	 </s:form>
 		  </div>
-		</div>
-		<div class="right_last">
-		  <div align="center">
-		  </div>
-		</div>
-	</div>
-</div>
-<!-- 左侧导航栏目 -->
+		  
+		</div><br/>
+	   </div>
+	  </div>
 <script type="text/javascript" src="${path }js/jquery.min.js"></script>
 <script type="text/javascript" src="${path }js/admin.js"></script>
 <script type="text/javascript" src="${path }js/bootstrap.min.js"></script>

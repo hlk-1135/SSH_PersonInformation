@@ -53,4 +53,12 @@ public class UserDaoImpl implements UserDao {
 				.setInteger(0, id)
 				.uniqueResult();
 	}
+
+	@Override
+	public User findByUserName(String userName) {
+		return (User) this.getCurrentSession()
+				.createQuery("from User where userName=?")
+				.setString(0, userName)
+				.uniqueResult();
+	}
 }

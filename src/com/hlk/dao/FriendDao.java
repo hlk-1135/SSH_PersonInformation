@@ -10,7 +10,7 @@ public interface FriendDao {
 	public void update(Friends friends);
 	public void delete(Friends friends);
 	public Friends findById(int id);
-	List<Friends> getAll();
-	List<Friends> getAll(String friendName, String friendPhone);
+	public List<Friends> getAll();
+	public List<Friends> getAll(String friendName, String friendPhone);
 
 }

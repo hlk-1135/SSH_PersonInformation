@@ -5,7 +5,7 @@ var flag_phone=0;
 var flag_password=0;
 var flag_password_2=0;
 function checkName(){   //检测用户名
-	var s=document.getElementById("name");
+	var s=document.getElementById("userName");
 	var str=s.value;
 	var reg=/^[a-zA-Z0-9\u4E00-\u9FA5]+$/;
 	if(str.length>=2 && str.length<=12 && reg.test(str)){
@@ -20,10 +20,10 @@ function checkName(){   //检测用户名
 	}	
 }
 function checkPhone(){   //检验手机号是否符合规定
-	var p=document.getElementById("phoneNumber");
-	var phone=p.value;
+	var p=document.getElementById("phone");
+	var pho=p.value;
 	var reg_1=/^[0-9]+$/;
-	if(phone.length==11 && reg_1.test(phone)){
+	if(pho.length==11 && reg_1.test(pho)){
 		document.getElementById("errorPhone").innerText="Success";
 		document.getElementById("errorPhone").style.color="green";
 		flag_phone=1;
@@ -63,7 +63,7 @@ function checkPassword_2(){  //验证确认密码是否和密码相同
 	}
 }
 function checkApart(){   //检测职业
-	var s=document.getElementById("apart");
+	var s=document.getElementById("work");
 	var str=s.value;
 	if(str.length>0){
 		document.getElementById("errorApart").innerHTML="Success";
@@ -77,7 +77,7 @@ function checkApart(){   //检测职业
 	}	
 }
 function checkRealName(){   //检测真实姓名
-	var s=document.getElementById("realname");
+	var s=document.getElementById("realName");
 	var str=s.value;
 	if(str.length>0){
 		document.getElementById("errorRealName").innerHTML="Success";
