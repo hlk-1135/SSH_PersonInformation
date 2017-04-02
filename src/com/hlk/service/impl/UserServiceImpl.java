@@ -12,7 +12,7 @@ import com.hlk.service.UserService;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-	//注入userDao接口
+	//实现类中注入userDao接口
 	@Resource
 	private UserDao userDao;
 	

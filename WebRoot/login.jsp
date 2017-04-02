@@ -13,13 +13,13 @@
   	<s:form action="user_login" method="post" theme="simple">
   	 <table border="1" align="center" cellpadding="5" cellspacing="0">
   	 	<tr>
-  	 		<td>账号</td>
+  	 		<td>用户账号</td>
   	 		<td>
   	 			<s:textfield name="userName" id="userName" value=""></s:textfield>
   	 		</td>
   	 	</tr>
   	 	<tr>
-  	 		<td>密码：</td>
+  	 		<td>用户密码：</td>
   	 		<td>
   	 			<s:password name="password" id="password" value=""></s:password>
   	 		</td>

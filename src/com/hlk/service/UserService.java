@@ -11,7 +11,7 @@ public interface UserService {
 	public void save(User user);
 
 	/**
-	 * 登陆
+	 * 用户登陆
 	 * @param user
 	 * @return
 	 */

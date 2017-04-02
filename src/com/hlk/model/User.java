@@ -20,7 +20,6 @@ import javax.persistence.Table;
 public class User implements java.io.Serializable {
 
 	// Fields
-	private static final long serialVersionUID = 1L;
 	
 	private Integer userId;
 	private String userName;

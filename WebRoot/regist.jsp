@@ -9,7 +9,7 @@ request.setAttribute("path", basePath);
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="${path}css/register.css"/>
-		<title>注册页面</title>
+		<title>用户注册页面</title>
 	</head>
 	<body>
 		<div class="register">
