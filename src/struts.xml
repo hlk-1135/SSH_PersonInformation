@@ -25,7 +25,7 @@
 	<!-- 对于WebLogic,Orion,OC4J此属性应该设置成true -->
 	<constant name="struts.dispatcher.parametersWorkaround" value="false" />
 	<!-- 文件上传可接受的最大值 -->
-	<constant name="struts.multipart.maxSize" value="1000000" />
+	<constant name="struts.multipart.maxSize" value="10000000" />
 	<!-- 设置文件上传时的临时文件夹时 -->
 	<constant name="struts.multipart.saveDir" value="/file"/>
 	
@@ -74,7 +74,7 @@
         <!-- FileAction -->
         <action name="file_*" class="com.hlk.action.FileAction" method="{1}">
            <interceptor-ref name="fileUpload">
-             <param name="maximumSize">10000000</param>  
+             <param name="maximumSize">100000000</param>  
              <param name="allowedTypes">image/png,image/jpeg,image/jpg</param>  
            </interceptor-ref>
            <interceptor-ref name="defaultStack"/>
@@ -82,6 +82,7 @@
            
            <result name="viewFile">/WEB-INF/jsp/uploadFile.jsp</result>
            <result name="list">/WEB-INF/jsp/file.jsp</result>
+           <result name="fileListAction" type="redirectAction">file_list</result>
 	       <result name="success">/WEB-INF/jsp/success.jsp</result>
 	       <result name="error">error.jsp</result>
 	   </action>

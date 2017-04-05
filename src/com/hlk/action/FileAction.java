@@ -3,9 +3,13 @@ package com.hlk.action;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import com.hlk.model.Files;
 import com.hlk.model.User;
@@ -100,22 +104,31 @@ public class FileAction extends ActionSupport implements ModelDriven<Files>,Requ
 	 * @return
 	 * @throws Exception
 	 */
-	public String upload() throws Exception {
+	public String upload() {
 		files.setFileName(uploadFileName);
 		files.setContentType(uploadContentType);
 		files.setFilePath(savePath);
-		FileOutputStream out = new FileOutputStream(getSavePath()+"\\"+files.getFileName());
-		FileInputStream in = new FileInputStream(getUpload());
-		byte[] buffer = new byte[1024];
-		int len = 0;
-		while((len = in.read(buffer)) > 0) {
-			out.write(buffer,0,len);
+		
+		try {
+			InputStream in = new FileInputStream(upload);
+			String dir = ServletActionContext.getRequest().getRealPath(savePath);
+			System.out.println("*******dir:*****"+dir);
+			File uploadFile = new File(dir, uploadFileName);
+			OutputStream out = new FileOutputStream(uploadFile);
+			byte[] buffer = new byte[1024*1024];
+			int len;
+			while((len = in.read(buffer)) > 0) {
+				out.write(buffer,0,len);
+			}
+			in.close();
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		out.close();
 		User user = userService.findUserById(userId);
 		files.setUser(user);
 		fileService.save(files);
-		return "fileList";
+		return "fileListAction";
 	}
 	
 	/**
@@ -124,7 +137,6 @@ public class FileAction extends ActionSupport implements ModelDriven<Files>,Requ
 	public String list() {
 		List<Files> listFiles = fileService.getAllFiles();
 		request.put("listFiles", listFiles);
-		System.out.println("******"+listFiles);
 		return "list";
 	}
 	// 接收框架运行时候传入的代表request对象的map

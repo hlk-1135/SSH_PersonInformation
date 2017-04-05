@@ -54,7 +54,6 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 	 */
 	public String regist() {
 		User userInfo = userService.findUserByUserName(user.getUserName());
-		System.out.println("regist:"+user.getUserName());
 		if(userInfo == null) {
 			userService.save(user);
 			return "regsucc";
