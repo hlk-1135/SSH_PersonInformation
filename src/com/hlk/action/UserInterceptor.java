@@ -19,7 +19,7 @@ public class UserInterceptor extends AbstractInterceptor{
 		//从session中获取登录的用户对象
 		Object obj = ac.getSession().get("userInfo");
 		
-		if(!"login".equals(methodName)) {
+		if(!"login".equals(methodName) ) {
 			if(obj == null) { //如果session中userInfo对象为null
 				return "login";
 			} else {

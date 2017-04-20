@@ -63,7 +63,7 @@ request.setAttribute("path", basePath);
 							<td>
 								<input type="text" class="allInput" name="friendName"/>
 							</td>
-							<td width="90" align="right">手机号码查询：</td>
+							<td width="90" align="right">手机号查询：</td>
 							<td>
 								<input type="text" class="allInput" name="friendPhone"/>
 							</td>
@@ -71,12 +71,15 @@ request.setAttribute("path", basePath);
 	                        	<button type="submit" class="btn btn-sm btn-info">查询</button>
 	                        </td>
 	   					</tr>
+	   					<tr><td width="85" align="right">
+	                        	<a type="button" id="delchecked" onclick="delchecked()" class="btn btn-sm btn-danger">批量删除选定项</a>
+	                        </td></tr>
 					</tbody>
 				</table>
 			</s:form>
 			<table class="table table-bordered table-striped" id="table">
 				<tr>
-				    <th><input type="checkbox" id="all" onclick=""/></th>
+				    <th><input type="checkbox"/></th>
 				    <th>序号：</th>
 				    <th>联系人姓名：</th>
 				    <th>手机号码：</th>
@@ -88,7 +91,7 @@ request.setAttribute("path", basePath);
 				<s:if test="#request.listFriends != null">
 					<s:iterator var="friend" value="#request.listFriends" status="st">
 	  	 				<tr>
-	  	 				<th><input type="checkbox" id="all" onclick=""/></th>
+	  	 				<th><input type="checkbox" name="checkboxes" value="<s:property value="#friend.friendId"/>"/></th>
 	  	 				<td> <s:property value="#st.index+1"/> </td>
 	  	 				<td> <s:property value="#friend.friendName"/> </td>
 	  	 				<td> <s:property value="#friend.friendPhone"/> </td>
@@ -98,7 +101,7 @@ request.setAttribute("path", basePath);
 	  	 				<td> 
 	  	 					<a id="<s:property value="#st.index+1"/>" onclick="editInfo(this)" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#my_modal">详情</a>
                             <a href="fri_viewUpdate?id=<s:property value="#friend.friendId"/>" type="button" class="btn btn-sm btn-warning">修改</a>
-                            <a href="fri_delete?id=<s:property value="#friend.friendId"/>" type="button" class="btn btn-sm btn-danger">删除</a>
+                            <a href="fri_delete?ids=<s:property value="#friend.friendId"/>" type="button" class="btn btn-sm btn-danger">删除</a>
 	  	 				</td>
 	  	 				</tr>
   	 				</s:iterator>
@@ -177,6 +180,27 @@ request.setAttribute("path", basePath);
 	    $('#b_phone').text(phone);  
 	    $('#b_company').text(company); 
 	    $('#b_qq').text(qq);
+	}
+	
+	function delchecked() {
+		var ids="";
+		var obj=$("input[name='checkboxes']");
+		
+		for(var i=0;i<obj.length;i++) {
+			if(obj[i].checked)
+				if(ids=="") {
+					ids += obj[i].value;
+				} else {
+					ids += "," + obj[i].value;
+				}
+		}
+		alert(ids);
+		if(ids == ""){
+			alert("请勾选要删除的项"); 
+			return false; 
+		}
+		if(confirm("你确定要删除选定项？"))
+			location.href="fri_deletemany?ids=" + ids;	//跳转到action
 	}
 </script>
 <script type="text/javascript" src="${path }js/jquery.min.js"></script>

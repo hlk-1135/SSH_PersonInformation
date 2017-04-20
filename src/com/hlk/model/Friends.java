@@ -17,8 +17,7 @@ import javax.persistence.Table;
 public class Friends implements java.io.Serializable {
 
 	// Fields
-	private static final long serialVersionUID = 1L;
-	
+
 	private Integer friendId;
 	private User user;
 	private String friendName;

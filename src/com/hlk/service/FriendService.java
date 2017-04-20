@@ -44,10 +44,5 @@ public interface FriendService {
 	 * @param id
 	 */
 	public void delete(Friends friends);
-	
-	/**
-	 *  删除多个联系人
-	 */
-	public void deleteMany(int[] ids);
 
 }

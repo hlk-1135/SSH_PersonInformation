@@ -112,7 +112,6 @@ public class FileAction extends ActionSupport implements ModelDriven<Files>,Requ
 		try {
 			InputStream in = new FileInputStream(upload);
 			String dir = ServletActionContext.getRequest().getRealPath(savePath);
-			System.out.println("*******dir:*****"+dir);
 			File uploadFile = new File(dir, uploadFileName);
 			OutputStream out = new FileOutputStream(uploadFile);
 			byte[] buffer = new byte[1024*1024];

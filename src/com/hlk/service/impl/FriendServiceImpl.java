@@ -46,13 +46,4 @@ public class FriendServiceImpl implements FriendService {
 		friendDao.delete(friends);
 	}
 
-	@Override
-	public void deleteMany(int[] ids) {
-		if(ids != null && ids.length>0) {
-//			for(int id : ids) {
-//				delete(id);
-//			}
-		}
-	}
-
 }

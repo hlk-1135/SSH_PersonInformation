@@ -78,6 +78,7 @@ request.setAttribute("path", basePath);
 				    <th>文件描述：</th>
 				    <th>上传日期：</th>
 				    <th>文件类型：</th>
+				    <th>上传地址：</th>
 				    <th>上传用户：</th>
 				    <th>操作：</th>
 				</tr>
@@ -90,10 +91,11 @@ request.setAttribute("path", basePath);
 	  	 				<td> <s:property value="#file.description"/> </td>
 	  	 				<td> <s:property value="#file.fileDate"/> </td>
 	  	 				<td> <s:property value="#file.contentType"/> </td>
+	  	 				<td> <s:property value="#file.filePath"/> </td>
 	  	 				<td> <s:property value="#session.userInfo.userName"/> </td>
 	  	 				<td> 
 	  	 					<a id="<s:property value="#st.index+1"/>" onclick="editInfo(this)" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#my_modal">详情</a>
-                            <a href="" type="button" class="btn btn-sm btn-warning">修改</a>
+                            <a href="" type="button" class="btn btn-sm btn-warning">下载</a>
                             <a href="" type="button" class="btn btn-sm btn-danger">删除</a>
 	  	 				</td>
 	  	 				</tr>
@@ -146,6 +148,7 @@ request.setAttribute("path", basePath);
 					文件描述：	<scan id="b_phone"></scan><hr/>
 					上传日期： 	<scan id="b_company"></scan><hr/>
 					文件类型： 	<scan id="b_qq"></scan>
+					照片：<img src="" id=""/>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

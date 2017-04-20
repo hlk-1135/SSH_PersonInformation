@@ -18,6 +18,15 @@ public class FriendAction extends ActionSupport implements ModelDriven<Friends>,
 	
 	private Friends friends = new Friends();
 	private int userId;
+	private String ids;
+	
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+	public String getIds() {
+		return ids;
+	}
+	
 	public void setFriends(Friends friends) {
 		this.friends = friends;
 	}
@@ -117,10 +126,25 @@ public class FriendAction extends ActionSupport implements ModelDriven<Friends>,
 	 */
 	public String delete() {
 		//获取出需要删除的联系人的id
-		String str = ServletActionContext.getRequest().getParameter("id");
+		String str = ServletActionContext.getRequest().getParameter("ids");
 		int num = Integer.parseInt(str);
 		Friends fri = friendService.findById(num);
 		friendService.delete(fri);
+		return "frilistAction";
+	}
+	
+	/**
+	 *  5. 删除多个联系人
+	 */
+	public String deletemany() {
+		//获取出需要删除的联系人的id
+		String str = ServletActionContext.getRequest().getParameter("ids");
+		String[] s = str.trim().split(",");
+		for (int i = 0; i < s.length; i++) {
+			int id = Integer.parseInt(s[i]);
+			Friends f = friendService.findById(id);
+			friendService.delete(f);
+		}
 		return "frilistAction";
 	}
 	

@@ -9,7 +9,7 @@
     <!-- 自动扫描dao和service包(自动注入) -->
 	<context:component-scan base-package="com.hlk.dao,com.hlk.service"/>
 	<!-- 引入属性文件 -->
-	<context:property-placeholder location="/WEB-INF/classes/config.properties"/>
+	<context:property-placeholder location="/WEB-INF/classes/jdbc.properties"/>
 	<context:property-placeholder location="/WEB-INF/classes/log4j.properties"/>
 	<!-- 配置数据源 -->
 	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
